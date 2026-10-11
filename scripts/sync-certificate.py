@@ -9,7 +9,8 @@ with tempfile.TemporaryDirectory(dir=root) as temporary:
  stage=Path(temporary)
  for name in ['fullchain.pem','privkey.pem']:shutil.copyfile(source/name,stage/name)
  cert=stage/'fullchain.pem';key=stage/'privkey.pem'
- command('openssl','x509','-in',str(cert),'-noout','-checkhost','relay.battlefronteternal.com')
+ matched=command('openssl','x509','-in',str(cert),'-noout','-checkhost','relay.battlefronteternal.com')
+ if b'does match certificate' not in matched:raise RuntimeError('certificate hostname mismatch')
  command('openssl','x509','-in',str(cert),'-noout','-checkend','604800')
  pub=command('openssl','x509','-in',str(cert),'-pubkey','-noout')
  if pub!=command('openssl','pkey','-in',str(key),'-pubout'):raise RuntimeError('certificate key mismatch')
