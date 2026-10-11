@@ -1,0 +1,14 @@
+{
+  "name": "battlefront-eternal-relay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node src/main.js"
+  }
+}
