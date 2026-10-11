@@ -8,13 +8,15 @@ its dependencies retain their own licenses. No custom encryption or relay protoc
 `APP_IMAGE` and a 64-character hex `TURN_SECRET` shared with the master. The public
 IPv4/IPv6 values in Compose are Aldine's addresses.
 
-Listeners: UDP/TCP 3478, TLS TCP 5349, allocations UDP 49160–49259. TCP 80/443
+Listeners: UDP/TCP 3478, TLS TCP 5349, allocations UDP 49160–49415. TCP 80/443
 remain with the existing web proxy. TURN over TCP is a client-to-relay fallback;
 `no-tcp-relay` disables RFC 6062 peer TCP allocations, not this fallback.
-The initial limit is 80 allocations total and four per temporary username, with
-256 KiB/s per session and a 10 MiB/s aggregate configuration cap. Measure actual
-capacity before raising limits. The 100-port allocation pool may constrain usable
-sessions before the configured quota. Internal and metadata peer destinations
+The limit is 160 allocations total and four per temporary username, with
+256 KiB/s per session and a 10 MiB/s aggregate configuration cap. The 256-port
+allocation pool accommodates 64 fully relayed peers using an allocation at each
+end, with room for reconnects. This provisions slots; it does not certify
+64-player gameplay performance. CPU and memory remain capped at 0.75 cores and
+256 MiB. Internal and metadata peer destinations
 are denied. No public admin listener or unauthenticated allocations.
 
 The host certificate sync job publishes only the relay certificate and key into

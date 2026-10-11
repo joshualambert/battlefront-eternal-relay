@@ -10,11 +10,16 @@ test("bounded authenticated dual-stack TURN without port 443", () => {
   for (const line of [
     "use-auth-secret",
     "tls-listening-port=5349",
-    "total-quota=80",
+    "total-quota=160",
+    "min-port=49160",
+    "max-port=49415",
     "denied-peer-ip=127.0.0.0-127.255.255.255",
   ])
     assert.ok(s.includes(line));
   assert.ok(!s.includes("listening-port=443"));
+  const value = key => Number(s.match(new RegExp(`^${key}=(\\d+)$`, 'm'))[1]);
+  assert.ok(value('total-quota') >= 64 * 2, '64 fully relayed peers may need an allocation at each end');
+  assert.ok(value('max-port') - value('min-port') + 1 >= value('total-quota'), 'port pool must cover the allocation quota');
 });
 test("config injection and missing secrets rejected", () => {
   assert.throws(() => config({}));

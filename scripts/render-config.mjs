@@ -18,9 +18,9 @@ fingerprint
 use-auth-secret
 static-auth-secret=${secret}
 min-port=49160
-max-port=49259
+max-port=49415
 user-quota=4
-total-quota=80
+total-quota=160
 max-bps=262144
 bps-capacity=10485760
 stale-nonce=600
