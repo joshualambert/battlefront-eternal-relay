@@ -1,6 +1,6 @@
 FROM coturn/coturn:4.18.0-r0@sha256:bbefd3e1fdfdc0d58770fe01b581fd8b00d9f3a5580d00acb77cf719a6bc78e3
 USER root
-RUN apt-get update && apt-get install -y --no-install-recommends nodejs && rm -rf /var/lib/apt/lists/* && mkdir -p /run/bfe && chown 1000:1000 /run/bfe
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs libcap2-bin && setcap -r /usr/bin/turnserver && rm -rf /var/lib/apt/lists/* && mkdir -p /run/bfe && chown 1000:1000 /run/bfe
 COPY scripts/render-config.mjs /app/render-config.mjs
 COPY scripts/entrypoint.sh /app/entrypoint.sh
 USER 1000:1000
