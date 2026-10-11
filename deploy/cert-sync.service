@@ -1,0 +1,7 @@
+[Unit]
+Description=Sync Battlefront Eternal relay certificate from Nginx Proxy Manager
+After=docker.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/battlefront-eternal/scripts/sync-certificate.py
+UMask=0027
