@@ -15,9 +15,10 @@ The limit is 160 allocations total and four per temporary username, with
 256 KiB/s per session and a 10 MiB/s aggregate configuration cap. The 256-port
 allocation pool accommodates 64 fully relayed peers using an allocation at each
 end, with room for reconnects. This provisions slots; it does not certify
-64-player gameplay performance. CPU and memory remain capped at 0.75 cores and
-256 MiB. Internal and metadata peer destinations
-are denied. No public admin listener or unauthenticated allocations.
+64-player gameplay performance. The production container may use up to two CPU cores and
+1 GiB RAM. These are shared-host ceilings, not reserved capacity; gameplay
+qualification still requires load testing the game server and relay together.
+Internal and metadata peer destinations are denied. No public admin listener or unauthenticated allocations.
 
 The host certificate sync job publishes only the relay certificate and key into
 `/opt/battlefront-eternal/certs/current`, read-only in the container. Run renewal
