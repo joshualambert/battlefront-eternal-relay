@@ -21,8 +21,8 @@ min-port=49160
 max-port=49415
 user-quota=4
 total-quota=160
-max-bps=262144
-bps-capacity=10485760
+max-bps=1048576
+bps-capacity=167772160
 stale-nonce=600
 no-tcp-relay
 no-multicast-peers
